@@ -42,10 +42,4 @@ public class Player implements Enemy {
     public void setPosy(int y) {
         this.posy = y;
     }
-    public int getPosy(){
-        return this.posy;
-    }
-    public void setPosy(int y){
-        this.posy=y;
-    }
 }
