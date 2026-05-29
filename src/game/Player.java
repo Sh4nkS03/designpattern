@@ -19,7 +19,7 @@ public class Player implements Enemy {
 
     @Override
     public void takeDamage(int damage) {
-        life -= damage;
+        this.life -= damage;
     }
 
     @Override
@@ -41,5 +41,11 @@ public class Player implements Enemy {
 
     public void setPosy(int y) {
         this.posy = y;
+    }
+    public int getPosy(){
+        return this.posy;
+    }
+    public void setPosy(int y){
+        this.posy=y;
     }
 }
