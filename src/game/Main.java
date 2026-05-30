@@ -1,5 +1,5 @@
 package game;
-//import external.robo.EnemyRobot;
+import external.robo.EnemyRobot;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +10,12 @@ public class Main {
         enemy2.takeDamage(enemy1.attack(enemy2));
         System.out.println(enemy2.getHealth());
         
-        //robotEnemy.attack(enemy2); --> Objetivo
+        EnemyRobot robotExterno = new EnemyRobot(); 
+        
+        Enemy robotEnemy = new RobotAdapter(robotExterno);
+        
+        enemy2.takeDamage(robotEnemy.attack(enemy2));
+        System.out.println("Salud de enemy2 (tras ataque del Robot): " + enemy2.getHealth());
 
         }
 }
