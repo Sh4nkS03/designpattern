@@ -1,45 +1,56 @@
 package game;
 
-public class Player implements Enemy {
-    private int life = 100;
-    private int posx;
-    private int posy;
 
-    @Override
-    public void move() {
-        posx = (int) (Math.random() * 100);
-        posy = (int) (Math.random() * 100);
-    }
+public class Player extends Enemy {
+   private int life = 100;
+   private int posx;
+   private int posy;
 
-    @Override
-    public int attack(Enemy enemy) {
-        int golpe = (int) (Math.random() * 10);
-        return enemy.getHealth() - golpe;
-    }
 
-    @Override
-    public void takeDamage(int damage) {
-        this.life -= damage;
-    }
+   public Player(Arma arma) {
+       super(arma);
+   }
 
-    @Override
-    public int getHealth() {
-        return life;
-    }
 
-    public int getPosx() {
-        return this.posx;
-    }
+   @Override
+   public void move() {
+       posx = (int) (Math.random() * 100);
+       posy = (int) (Math.random() * 100);
+   }
 
-    public void setPosx(int x) {
-        this.posx = x;
-    }
 
-    public int getPosy() {
-        return this.posy;
-    }
+   @Override
+   public int attack(Enemy enemy) {
+       int dmgRealizado = arma.getDamage();
+       enemy.takeDamage(dmgRealizado);
+       return dmgRealizado;
+   }
 
-    public void setPosy(int y) {
-        this.posy = y;
-    }
+
+   @Override
+   public void takeDamage(int damage) {
+       this.life -= damage;
+   }
+
+
+   @Override
+   public int getHealth() {
+       return life;
+   }
+
+   public int getPosx() {
+       return this.posx;
+   }
+
+   public void setPosx(int x) {
+       this.posx = x;
+   }
+
+   public int getPosy() {
+       return this.posy;
+   }
+
+   public void setPosy(int y) {
+       this.posy = y;
+   }
 }

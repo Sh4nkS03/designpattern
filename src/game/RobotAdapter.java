@@ -1,38 +1,48 @@
 package game;
 
+
 import external.robo.EnemyRobot;
 
-public class RobotAdapter implements Enemy {
-    private EnemyRobot robot;
 
-    public RobotAdapter(EnemyRobot robot) {
-        this.robot = robot;
-    }
+public class RobotAdapter extends Enemy {
+   private EnemyRobot robot;
 
-    @Override
-    public void move() {
-        // Usamos una distancia predeterminada, por ejemplo, 5 unidades.
-        robot.moveForward(3);
-    }
 
-    @Override
-    public int attack(Enemy enemy) {
-        // Usamos el método smash. Según el bytecode, gasta 5 de energía.
-        // Como 'smash' en el JAR es void, definimos un daño estándar.
-        int damageDealt = 10; 
-        robot.smash(damageDealt);
-        return damageDealt;
-    }
+   //Constructor que recibe el Adapter y el Bridge (Arma)
 
-    @Override
-    public void takeDamage(int damage) {
-        // El método equivalente en el JAR es receiveShock
-        robot.receiveShock(damage);
-    }
 
-    @Override
-    public int getHealth() {
-        // En el robot, la "vida" es el nivel de energía
-        return robot.energyLevel();
-    }
+   public RobotAdapter(EnemyRobot robot, Arma arma) {
+       super(arma);
+       this.robot = robot;
+   }
+
+
+   @Override
+   public void move() {
+       // Usamos una distancia predeterminada, por ejemplo, 5 unidades.
+       robot.moveForward(5);
+   }
+
+
+   @Override
+   public int attack(Enemy enemy) {
+       int dmgRealizado = arma.getDamage();
+       System.out.println("Robot ataca con " + arma.getName() + " causando " + dmgRealizado + " de daño.");
+       robot.smash(dmgRealizado);
+       return dmgRealizado;
+   }
+
+
+   @Override
+   public void takeDamage(int damage) {
+       // El método equivalente en el JAR es receiveShock
+       robot.receiveShock(damage);
+   }
+
+
+   @Override
+   public int getHealth() {
+       // En el robot, la "vida" es el nivel de energía
+       return robot.energyLevel();
+   }
 }
